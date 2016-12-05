@@ -49,7 +49,13 @@ browserSync.use(browserSyncSpa({
 }));
 
 gulp.task('serve', ['watch'], function () {
-  browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
+  browserSyncInit([path.join(conf.paths.tmp, '/serve'), gulp.src('./dist/').pipe(webserver({
+host: '0.0.0.0',
+port: process.env.PORT || 5000,
+https: false,
+open: true
+}))]);
+
 });
 
 gulp.task('serve:dist', ['build'], function () {
