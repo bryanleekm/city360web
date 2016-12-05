@@ -45,7 +45,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "build": "gulp serve"
+    "start": "gulp serve"
   }, "engines": {
     "node": "7.2.0"
   }
