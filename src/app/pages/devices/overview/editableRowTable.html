@@ -1,0 +1,38 @@
+<div class="add-row-editable-table">
+  <button class="btn btn-primary" ng-click="addDevice()">Add Device</button>
+</div>
+<table class="table table-bordered table-hover table-condensed">
+  <tr>
+    <td><b>No.</b></td>
+    <td><b>Device Name</b></td>
+    <td><b>Status</b></td>
+    <td><b>Last Transmitted</b></td>
+    <td><b>Actions</b></td>
+  </tr>
+  <tr ng-repeat="device in devicelist" class="editable-row">
+    <td>
+        {{$index+1}}
+    </td>
+    <td>
+        <span>
+          {{ device.name }}
+        </span>
+    </td>
+    <td>
+        <span>
+          {{ showStatus($index) }}
+        </span>
+    </td>
+    <td class="select-td">
+        <span>
+          {{ showLastTransmitted($index) }}
+        </span>
+    </td>
+    <td>
+      <div class="buttons">
+        <button class="btn btn-info btn-xs" ng-click="showDeviceInfo($index)">Device Info</button>
+        <button class="btn btn-danger btn-xs" ng-click="removeDevice($index)">Delete</button>
+      </div>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,57 @@
+
+<div ba-panel ba-panel-title="Latest Report" class="viewport100">
+    <div class="row pie-charts">
+        <div class="pie-chart-item-container">
+          <div ba-panel>
+            <div class="pie-chart-item">
+              <i class="fa fa-thermometer-three-quarters" aria-hidden="true" style="font-size: 48px;"></i>
+              <div class="description">
+                <div>Temperature</div>
+                <div class="description-stats">{{ device.latest_report.temperature}}°C</div>
+              </div>
+        
+            </div>
+          </div>
+          </div>
+          <div class="pie-chart-item-container">
+          <div ba-panel>
+            <div class="pie-chart-item">
+              <i class="fa fa-tint" aria-hidden="true" style="font-size: 48px;"></i>
+              <div class="description">
+                <div>Humidity</div>
+                <div class="description-stats">{{ device.latest_report.humidity}}%</div>
+              </div>
+          
+            </div>
+          </div>
+          </div>
+          <div class="pie-chart-item-container">
+          <div ba-panel>
+            <div class="pie-chart-item">
+              <i class="glyphicon glyphicon-cloud" aria-hidden="true" style="font-size: 48px;"></i>
+              <div class="description">
+                <div>Air Pressure</div>
+                <div class="description-stats">{{ device.latest_report.pressure }}mb</div>
+              </div>
+
+            </div>
+          </div>
+          </div>
+          <div class="pie-chart-item-container">
+          <div ba-panel>
+            <div class="pie-chart-item">
+              <i class="glyphicon glyphicon-warning-sign" aria-hidden="true" style="font-size: 48px;"></i>
+              <div class="description">
+                <div>Outbreak Risk</div>
+                <div class="description-stats">{{device.latest_analytics.mosquito_risk}}%</div>
+              </div>
+          
+            </div>
+          </div>
+          </div>
+        </div>
+
+</div>
+
+
+

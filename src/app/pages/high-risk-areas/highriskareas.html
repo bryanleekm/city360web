@@ -1,0 +1,23 @@
+<div ba-panel ba-panel-title="Mosquito Risk Map" class="viewport100">
+	<div class="row">
+	  <div class="col-md-6 col-lg-4" ng-show="warning!=null">
+	    <div class="panel panel-warning bootstrap-panel">
+	      <div class="panel-heading">
+			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+			<b>Attention Required</b></div>
+	      <div class="panel-body"><b>{{warning}}</b> {{warningCount == 1 ? 'has' : 'have'}} a moderate risk of mosquito outbreaks.</div>
+	    </div>
+	  </div>
+	  <div class="col-md-6 col-lg-4" ng-show="serious!=null">
+	    <div class="panel panel-danger bootstrap-panel">
+	      <div class="panel-heading">
+			<i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+			<b>Fogging Advised!</b></div>
+	      <div class="panel-body"><b>{{serious}}</b> {{seriousCount == 1 ? 'has' : 'have'}} an alarmingly high risk of mosquito outbreaks!</div>
+	    </div>
+	  </div>
+  </div>
+  <div class="row">
+  	<div id="map-bubbles"></div>
+  </div>
+</div>

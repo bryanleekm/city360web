@@ -1,0 +1,15 @@
+<form>
+  <div class="form-group">
+    <label for="txtName">Device Name</label>
+    <input type="text" class="form-control" id="txtName" placeholder="Name" ng-model="data.name" required>
+  </div>
+  <div class="form-group">
+    <label for="txtLongitude">Longitude</label>
+    <input type="text" class="form-control" id="txtLongitude" placeholder="Longitude" ng-model="data.longitude" required>
+  </div>
+  <div class="form-group">
+    <label for="txtLatitude">Latitude</label>
+    <input type="text" class="form-control" id="txtLatitude" placeholder="Latitude" ng-model="data.latitude" required>
+  </div>
+  <button type="submit" class="btn btn-danger" ng-click="AddDevice()">Add Device</button>
+</form>

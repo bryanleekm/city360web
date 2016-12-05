@@ -148,7 +148,6 @@
   }
   .traffic-chart{
     position: inherit;
-    float: none;
     margin: 0 auto;
   }
   .chart-bg{
@@ -158,11 +157,12 @@
 
 @media (max-width: 1465px) and (min-width: 1199px){
   .channels-info{
-    display: none;
+    display: block;
+    width: 400px;
+    margin-bottom: 10px;
   }
   .traffic-chart{
     position: inherit;
-    float: none;
     margin: 0 auto;
   }
   .chart-bg{

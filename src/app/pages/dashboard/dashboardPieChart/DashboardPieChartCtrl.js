@@ -9,30 +9,26 @@
       .controller('DashboardPieChartCtrl', DashboardPieChartCtrl);
 
   /** @ngInject */
-  function DashboardPieChartCtrl($scope, $timeout, baConfig, baUtil) {
-    var pieColor = baUtil.hexToRGB(baConfig.colors.defaultText, 0.2);
-    $scope.charts = [{
-      color: pieColor,
-      description: 'New Visits',
-      stats: '57,820',
-      icon: 'person',
-    }, {
-      color: pieColor,
-      description: 'Purchases',
-      stats: '$ 89,745',
-      icon: 'money',
-    }, {
-      color: pieColor,
-      description: 'Active Users',
-      stats: '178,391',
-      icon: 'face',
-    }, {
-      color: pieColor,
-      description: 'Returned',
-      stats: '32,592',
-      icon: 'refresh',
-    }
-    ];
+  function DashboardPieChartCtrl($scope, $timeout, baConfig, baUtil, $http) {
+
+    $scope.chartcolor = baUtil.hexToRGB(baConfig.colors.defaultText, 0.2);
+
+    $http.get("http://city360api.herokuapp.com/v1/devices").
+      then(function(resp) {
+        
+        if(resp.data.length == 0){
+          console.log("nothing");
+        } else {
+          $scope.devicelist = resp.data;
+          $scope.numDevices = resp.data.length;
+          loadPieCharts();
+          
+        }
+        
+      }, function(resp) {
+        console.log("Error retrieving data.");
+      });
+
 
     function getRandomArbitrary(min, max) {
       return Math.random() * (max - min) + min;
@@ -41,6 +37,7 @@
     function loadPieCharts() {
       $('.chart').each(function () {
         var chart = $(this);
+        console.log("jere");
         chart.easyPieChart({
           easing: 'easeOutBounce',
           onStep: function (from, to, percent) {
@@ -57,7 +54,7 @@
       });
 
       $('.refresh-data').on('click', function () {
-        updatePieCharts();
+        //updatePieCharts();
       });
     }
 
@@ -69,7 +66,7 @@
 
     $timeout(function () {
       loadPieCharts();
-      updatePieCharts();
+      //updatePieCharts();
     }, 1000);
   }
 })();

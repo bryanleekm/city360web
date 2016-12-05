@@ -1,0 +1,24 @@
+<div class = "row">
+	<h2>{{device.name}}</h2>
+</div>
+
+<div class ="row">
+	<div ba-panel ba-panel-title="Device Status" class="viewport100">
+	{{ showStatus() }}
+	</div>
+</div>
+
+<div class ="row">
+	<div ba-panel ba-panel-title="Last Transmitted" class="viewport100">
+	{{showLastTransmitted()}}
+	</div>
+</div>
+
+<div class ="row">
+	<device-pie-chart></device-pie-chart>
+</div>
+<div class ="row">
+	<div ba-panel ba-panel-title="Device Location" class="viewport100">
+	  <div id="google-maps"></div>
+	</div>
+</div>

@@ -9,48 +9,53 @@
       .controller('TrafficChartCtrl', TrafficChartCtrl);
 
   /** @ngInject */
-  function TrafficChartCtrl($scope, baConfig, colorHelper) {
+  function TrafficChartCtrl($scope, baConfig, colorHelper, $http) {
 
-    $scope.transparent = baConfig.theme.blur;
-    var dashboardColors = baConfig.colors.dashboard;
-    $scope.doughnutData = [
-      {
-        value: 2000,
-        color: dashboardColors.white,
-        highlight: colorHelper.shade(dashboardColors.white, 15),
-        label: 'Other',
-        percentage: 87,
-        order: 1,
-      }, {
-        value: 1500,
-        color: dashboardColors.blueStone,
-        highlight: colorHelper.shade(dashboardColors.blueStone, 15),
-        label: 'Search engines',
-        percentage: 22,
-        order: 4,
-      }, {
-        value: 1000,
-        color: dashboardColors.surfieGreen,
-        highlight: colorHelper.shade(dashboardColors.surfieGreen, 15),
-        label: 'Referral Traffic',
-        percentage: 70,
-        order: 3,
-      }, {
-        value: 1200,
-        color: dashboardColors.silverTree,
-        highlight: colorHelper.shade(dashboardColors.silverTree, 15),
-        label: 'Direct Traffic',
-        percentage: 38,
-        order: 2,
-      }, {
-        value: 400,
-        color: dashboardColors.gossip,
-        highlight: colorHelper.shade(dashboardColors.gossip, 15),
-        label: 'Ad Campaigns',
-        percentage: 17,
-        order: 0,
-      },
-    ];
+    $scope.devicesConnected = 0;
+    $scope.devicesDisconn = 0;
+
+    $http.get("http://city360api.herokuapp.com/v1/devices").
+      then(function(resp) {
+        if(resp.data.length == 0){
+          console.log("empty");
+        } else {
+          $scope.devicelist = resp.data;
+          $scope.numDevices = resp.data.length;
+          var index = 0;
+          for(index =0; index<$scope.numDevices; index++){
+            if($scope.devicelist[index].latest_report!=null){
+              console.log(Date.parse($scope.devicelist[index].latest_report.date));
+              console.log(Date.now());
+              if ((Date.now()-Date.parse($scope.devicelist[index].latest_report.date))<300000){
+                $scope.devicesConnected++;
+              } else {
+                $scope.devicesDisconn++;
+              }
+            } else {
+              $scope.devicesDisconn++;
+            }
+            
+          }
+
+          $scope.transparent = baConfig.theme.blur;
+          var dashboardColors = baConfig.colors.dashboard;
+          $scope.doughnutData = [
+            {
+              value: $scope.devicesConnected,
+              color: dashboardColors.silverTree,
+              highlight: colorHelper.shade(dashboardColors.silverTree, 15),
+              label: 'Online',
+              percentage: (Math.round($scope.devicesConnected/$scope.numDevices*100, 2)),
+              order: 1,
+            }, {
+              value: $scope.devicesDisconn,
+              color: dashboardColors.blueStone,
+              highlight: colorHelper.shade(dashboardColors.blueStone, 15),
+              label: 'Offline',
+              percentage: (Math.round($scope.devicesDisconn/$scope.numDevices*100, 2)),
+              order: 2,
+            }
+          ];
 
     var ctx = document.getElementById('chart-area').getContext('2d');
     window.myDoughnut = new Chart(ctx).Doughnut($scope.doughnutData, {
@@ -58,5 +63,12 @@
       percentageInnerCutout : 64,
       responsive: true
     });
+        }
+        
+      }, function(resp) {
+        console.log("Error retrieving data.");
+    });
+
+    
   }
 })();
