@@ -47,7 +47,8 @@
     "wrench": "~1.5.8"
   },
   "scripts": {
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "start": "node index.js"
   }, "engines": {
     "node": "7.2.0"
   }
