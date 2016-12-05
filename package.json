@@ -2,7 +2,6 @@
   "name": "blur_admin",
   "version": "1.2.0",
   "devDependencies": {
-    "bower": "1.8.0",
     "browser-sync": "~2.9.11",
     "browser-sync-spa": "~1.0.3",
     "chalk": "~1.1.1",
@@ -44,9 +43,6 @@
     "wrench": "~1.5.8"
   },
   "scripts": {
-    "postinstall": "bower install",
-    "start": "gulp serve"
-  }, "engines": {
-    "node": "7.2.0"
+    "postinstall": "bower install"
   }
 }
