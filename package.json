@@ -48,7 +48,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "start": "node index.js"
+    "start": "node app.js"
   }, "engines": {
     "node": "7.2.0"
   }
